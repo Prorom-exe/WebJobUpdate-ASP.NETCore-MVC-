@@ -5,33 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebJob.Interfaces;
 using WebJob.Models;
 
 namespace WebJob.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ITovar _tovars;
+        private readonly ICategory _categories;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ITovar tovar, ICategory category)
         {
-            _logger = logger;
+            _tovars = tovar;
+            _categories = category;
         }
+        public ViewResult List()
+        {
+            var category = _categories;
 
-        public IActionResult Index()
+            return View(_categories.AllCategories);
+                
+        }
+        public ViewResult Administrator()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

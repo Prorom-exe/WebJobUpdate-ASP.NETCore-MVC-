@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Tovar>
+@{ Layout = "_Layout";}
+
+
+    @foreach (var t in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="img-thumbnail" src="@t.Img" alt="@t.TovarName" />
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Название:</strong> @t.TovarName
+                        <strong>Цена:</strong>@t.Price р.
+                        <strong>Описание:</strong>@t.Car
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button>
+                        </div>
+                        <small class="text-muted">Количество:@t.Quantity</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }

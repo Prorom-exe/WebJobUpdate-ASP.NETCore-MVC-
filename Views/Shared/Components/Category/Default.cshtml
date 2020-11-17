@@ -1,0 +1,12 @@
+﻿@model IEnumerable<string>
+@foreach(var catName in Model)
+        {
+    <ul class="nav flex - column" >
+              <li class="nav-item">
+                 <a class="nav-link active" href="/Tovar/Category/@catName">
+                  @catName <span class="sr-only">(current)</span>
+                 </a>
+                  </li>
+     </ul>
+
+}
