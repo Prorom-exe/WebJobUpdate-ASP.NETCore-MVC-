@@ -18,6 +18,7 @@ namespace WebJob.Models
         public string Car { get; set; }
 
         public string Img { get; set; }
+        public byte[] Path { get; set; }
         public uint Quantity { get; set; }
         public virtual Category Category { get; set; }
 

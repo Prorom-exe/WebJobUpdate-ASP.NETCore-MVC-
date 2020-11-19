@@ -22,11 +22,12 @@ namespace WebJob.Controllers
         }
         public ViewResult List()
         {
-            var category = _categories;
+            //var category = _categories;
 
             return View(_categories.AllCategories);
                 
         }
+
         public ViewResult Administrator()
         {
             return View();

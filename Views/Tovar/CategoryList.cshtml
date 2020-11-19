@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WebJob.Models.Category>
+@{ Layout = "_LayoutAdminPanel";}
+<h2>Список категорий товаров</h2>
+<a asp-action="CatCreate">Добавить категорию</a>
+<table class="table">
+    @foreach (var category in Model)
+    {
+    <tr>
+        <td>@category.CategoryName</td>
+        @if (category.Visible.Equals(true)) {<td> Скрыто </td> }
+        
+        <td>
+            <a class="btn btn-sm btn-primary" method="post" asp-action="CategoryEdit" asp-route-catId="@category.Id">Редактировать</a>
+        </td>
+    </tr>
+    }
+</table>

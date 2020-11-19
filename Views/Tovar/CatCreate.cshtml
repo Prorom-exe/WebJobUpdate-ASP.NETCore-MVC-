@@ -1,0 +1,22 @@
+﻿@model WebJob.Data.Models.ViewModels.CategoryCreateViewModel
+@{ Layout ="_LayoutAdminPanel";}
+<form asp-action="CatCreate" asp-controller="Tovar">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="CategoryName" class="control-label">Название категории</label>
+        <input type="text" asp-for="CategoryName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Описание</label>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+
+        <label asp-for="Visible"><input  type="checkbox" asp-for="Visible" value="" />Скрыть</label>
+
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+    </div>
+</form>
