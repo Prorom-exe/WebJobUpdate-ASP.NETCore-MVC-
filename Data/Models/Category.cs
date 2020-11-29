@@ -18,7 +18,7 @@ namespace WebJob.Models
         public bool Visible{ get; set; }
         public string ImgCat { get; set; }
 
-        public List<Tovar> tovarCar { get;  set; }
+        public List<Tovar> Tovars { get;  set; }
 
     }
     

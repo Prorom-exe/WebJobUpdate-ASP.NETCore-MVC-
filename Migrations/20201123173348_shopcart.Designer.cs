@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebJob.Data;
 
 namespace WebJob.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20201123173348_shopcart")]
+    partial class shopcart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,35 +159,15 @@ namespace WebJob.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("BuyQantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int?>("ShopId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TovarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TovarName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ShopId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("BuyTovar");
                 });
@@ -200,22 +182,15 @@ namespace WebJob.Migrations
                     b.Property<int>("BuyQantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TovarId")
+                    b.Property<int?>("TovarId")
                         .HasColumnType("int");
-
-                    b.Property<string>("TovarName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TovarId");
 
                     b.HasIndex("UserId");
 
@@ -409,20 +384,20 @@ namespace WebJob.Migrations
                         .WithMany()
                         .HasForeignKey("ShopId");
 
-                    b.HasOne("WebJob.Data.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Shop");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebJob.Data.Models.ShopCart", b =>
                 {
+                    b.HasOne("WebJob.Models.Tovar", "Tovar")
+                        .WithMany()
+                        .HasForeignKey("TovarId");
+
                     b.HasOne("WebJob.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Tovar");
 
                     b.Navigation("User");
                 });

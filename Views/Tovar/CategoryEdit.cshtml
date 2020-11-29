@@ -16,8 +16,9 @@
     </div>
     <div class="form-group">
 
-        <label asp-for="Visible"><input type="checkbox" asp-for="Visible" value="@Model.Visible" />Скрыть</label>
-         @(Model.Visible.Contains())
+        <input type="checkbox" asp-for="Visible" value="true"/>
+        <label asp-for="Visible" class="control-label">Скрыть</label>@(Model.Visible.ToString().Equals("true") ? "checked=\"checked\"" : "" ) 
+         
         
     </div>
     <div class="form-group">

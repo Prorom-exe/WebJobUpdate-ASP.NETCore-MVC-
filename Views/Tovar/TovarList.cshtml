@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebJob.Models.Tovar>
+@{ Layout = "_LayoutAdminPanel";}
+<h2>Список товаров</h2>
+<a asp-action="TovarCreate">Добавить товар</a>
+<table class="table">
+    @foreach (var tov in Model)
+    {
+    <tr>
+        <td>@tov.TovarName</td>
+
+        @if (tov.Visible.Equals(true))
+        {
+            <td>Скрыто</td>
+        }
+
+        <td>
+            @tov.Category.CategoryName
+        </td>
+        <td>
+            <a class="btn btn-sm btn-primary" asp-action="TovarEdit" asp-route-tovId="@tov.Id">Изменить</a>
+        </td>
+    </tr>
+    }
+</table> 

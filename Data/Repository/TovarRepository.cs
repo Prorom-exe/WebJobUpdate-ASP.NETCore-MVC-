@@ -15,7 +15,7 @@ namespace WebJob.Data.Repository
         {
             this.appDBContent = appDBContent;
         }
-        public IEnumerable<Tovar> AllTovars => appDBContent.Tovar.Include(c=>c.Category);
+        public IQueryable<Tovar> AllTovars => appDBContent.Tovar.Include(c=>c.Category);
 
         public Tovar currentTovar(int tovarId) => appDBContent.Tovar.FirstOrDefault(p => p.Id==tovarId);
        

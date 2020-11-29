@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebJob.Data;
 
 namespace WebJob.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20201121173400_TovarEdist2")]
+    partial class TovarEdist2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,78 +152,6 @@ namespace WebJob.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebJob.Data.Models.BuyTovar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("BuyQantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ShopId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TovarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TovarName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShopId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BuyTovar");
-                });
-
-            modelBuilder.Entity("WebJob.Data.Models.ShopCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("BuyQantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TovarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TovarName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ShopCart");
-                });
-
             modelBuilder.Entity("WebJob.Data.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -321,8 +251,8 @@ namespace WebJob.Migrations
                     b.Property<string>("Car")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CatalogId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -401,30 +331,6 @@ namespace WebJob.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WebJob.Data.Models.BuyTovar", b =>
-                {
-                    b.HasOne("WebJob.Data.Models.ShopCart", "Shop")
-                        .WithMany()
-                        .HasForeignKey("ShopId");
-
-                    b.HasOne("WebJob.Data.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Shop");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebJob.Data.Models.ShopCart", b =>
-                {
-                    b.HasOne("WebJob.Data.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebJob.Models.Tovar", b =>

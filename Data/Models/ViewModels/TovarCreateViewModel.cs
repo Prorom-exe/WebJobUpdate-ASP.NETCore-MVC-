@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebJob.Models;
 
-namespace WebJob.Models
+namespace WebJob.Data.Models.ViewModels
 {
-    public class Tovar
+    public class TovarCreateViewModel
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
@@ -17,12 +19,9 @@ namespace WebJob.Models
 
         public string Car { get; set; }
 
-        public string Img { get; set; }
-        public byte[] Path { get; set; }
         public bool Visible { get; set; }
+        public IFormFile Path { get; set; }
         public uint Quantity { get; set; }
         public virtual Category Category { get; set; }
-
-
     }
 }

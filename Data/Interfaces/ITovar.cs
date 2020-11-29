@@ -8,7 +8,7 @@ namespace WebJob.Interfaces
 {
       public interface ITovar
     {
-        IEnumerable<Tovar> AllTovars { get; }
+        IQueryable<Tovar> AllTovars { get; }
         Tovar currentTovar(int tovarId);
     }
 }

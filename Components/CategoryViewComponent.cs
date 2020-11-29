@@ -11,7 +11,7 @@ namespace WebJob.Views.Components
 {
     public class CategoryViewComponent:ViewComponent
     {
-        //private readonly ICategory _category;
+        
 
         List<string> catName = new List<string>();
         public CategoryViewComponent(ICategory category)
@@ -20,7 +20,14 @@ namespace WebJob.Views.Components
             //_category = category;
             foreach(var cat in category.AllCategories)
             {
-                catName.Add(Convert.ToString(cat.CategoryName));
+                if (cat.Visible == false)
+                {
+                    catName.Add(Convert.ToString(cat.CategoryName));
+                }
+                else
+                {
+                    continue;
+                }
                 
             }
             
@@ -28,11 +35,10 @@ namespace WebJob.Views.Components
 
 
         
-         public IViewComponentResult Invoke() 
+         public IViewComponentResult Invoke()  
         {
             return View(catName);
-        }   
-            
-                    
+        }
+       
     }
 }

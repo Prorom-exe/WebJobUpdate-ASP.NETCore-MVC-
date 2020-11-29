@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Category>
+
+
+<option disabled>Выберите категорию</option>
+@foreach (var cat in Model)
+{
+    if (cat.Id==(int)ViewBag.Category)
+    {
+        <option value="@cat.Id" selected>@cat.CategoryName</option>
+    }
+    else
+    {
+    <option value="@cat.Id">@cat.CategoryName</option>
+    }
+}

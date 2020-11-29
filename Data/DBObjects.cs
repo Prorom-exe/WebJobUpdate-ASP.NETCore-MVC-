@@ -46,7 +46,7 @@ namespace WebJob.Data
                         Price = 4500,
                         Car = "Skoda octavia,Audi A4",
                         Quantity = 10,
-                        CatalogId = 234893,
+                        CatalogId = "234893",
                         Img = "",
                         Category = Categories["Двигатель"]
 
@@ -57,7 +57,7 @@ namespace WebJob.Data
                         Price = 250,
                         Car = "Ваз 2114",
                         Quantity = 10,
-                        CatalogId = 2343,
+                        CatalogId = "543",
                         Img = "",
                         Category = Categories["Электрика"]
 
@@ -68,7 +68,7 @@ namespace WebJob.Data
                         Price = 700,
                         Car = "",
                         Quantity = 10,
-                        CatalogId = 2343,
+                        CatalogId = "2343",
                         Img = "",
                         Category = Categories["Ходовая"]
 
