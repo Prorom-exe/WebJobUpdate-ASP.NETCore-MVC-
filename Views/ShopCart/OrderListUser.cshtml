@@ -1,0 +1,36 @@
+﻿@{ Layout = "_LayoutOutCat";}
+@model List<IGrouping<Guid, BuyTovar>>
+<h3>Список заказов</h3>
+<table class="table">
+    <tr><th>Товары</th><th> ID Товара</th><th> Количество</th><th>Цена</th><th> Статус заказа</th><th></th></tr>
+</table>
+@foreach (var g in Model)
+{
+    <h5 class="border border-primary" color ="blue"> Номер заказа: @g.Key</h5>
+<table class="table">
+    
+       
+        
+        @foreach (var t in g)
+        {
+
+    <tr>
+
+        <td width=200>@t.TovarName</td>
+        <td width=200>@t.TovarId</td>
+        <td width=200>@t.BuyQantity</td>
+        <td width=200>@t.Price</td>
+        <td width=200>@t.State</td>
+    </tr>
+        }
+
+</table>
+
+}
+
+
+
+
+
+
+

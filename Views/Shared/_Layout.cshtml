@@ -22,7 +22,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="#">@User.Identity.Name</a>
+                            <form asp-action="OrderListUser" asp-controller="ShopCart">
+                                <input class="btn btn-link" style="color:lightgray" type="submit" value="@User.Identity.Name" />
+                            </form>
                         </li>
                         <li class="nav-item">
                             <form method="post" asp-controller="Account" asp-action="Logout">

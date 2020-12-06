@@ -21,7 +21,7 @@ namespace WebJob.Data.Models.ViewModels
 
         public bool Visible { get; set; }
         public IFormFile Path { get; set; }
-        public uint Quantity { get; set; }
+        public int Quantity { get; set; }
         public virtual Category Category { get; set; }
     }
 }

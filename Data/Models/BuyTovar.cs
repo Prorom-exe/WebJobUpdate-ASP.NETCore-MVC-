@@ -10,12 +10,11 @@ namespace WebJob.Data.Models
     {
         public int Id { get; set; }
         public User User { get; set; }
-        public int TovarId { get; set; }
         public string TovarName { get; set; }
-        public string CatalogId { get; set; }
-        public decimal Price { get; set; }
+        public int TovarId { get; set; }
+        public Guid OrderId { get; set; }
         public int BuyQantity { get; set; }
-        public ShopCart Shop { get; set; }
+        public decimal Price { get; set; }
         public string State { get; set; }
     }
 }

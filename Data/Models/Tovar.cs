@@ -20,7 +20,7 @@ namespace WebJob.Models
         public string Img { get; set; }
         public byte[] Path { get; set; }
         public bool Visible { get; set; }
-        public uint Quantity { get; set; }
+        public int Quantity { get; set; }
         public virtual Category Category { get; set; }
 
 

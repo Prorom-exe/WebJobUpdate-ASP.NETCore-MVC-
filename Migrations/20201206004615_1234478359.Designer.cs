@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebJob.Data;
 
 namespace WebJob.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20201206004615_1234478359")]
+    partial class _1234478359
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,8 +333,8 @@ namespace WebJob.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<long>("Quantity")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("TovarName")
                         .HasColumnType("nvarchar(max)");
