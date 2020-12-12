@@ -1,0 +1,55 @@
+﻿@{ Layout = "_LayoutOutCat";}
+@model List<IGrouping<string, BuyTovar>>
+
+<table class="table">
+    <tr><th>1</th><th>2</th><th>3</th></tr>
+    @foreach (var g in Model)
+    {
+        
+
+        @foreach (var t in g)
+        {
+<tr>
+
+
+    @if (t.State.Equals("В обработке"))
+    {
+        <td> Пользователь: @t.UserName</td>
+        <td style="background:#4cff00; color:#ffffff">Есть активные заказы</td>
+        <td>
+            <form asp-action="OrderEdit">
+                <input type="hidden" name="userId" value="@g.Key" />
+
+                <button type="submit" class="btn btn-primary">Посмотреть</button>
+            </form>
+        </td>
+        break;
+    }
+    else if (t.State.Equals("Ожидает Выдачи"))
+    {
+        <td> Пользователь: @t.UserName</td>
+        <td style="background:#ffd800; color:#ffffff">Есть активные заказы</td>
+        <td>
+            <form asp-action="OrderEdit">
+                <input type="submit" value="Просмотреть" class="btn btn-outline-secondary" />
+            </form>
+        </td>
+        break;
+    }
+    else if (t.State.Equals("Завершен"))
+    {
+        <td> Пользователь: @t.UserName</td>
+        <td style="background:#808080; color:#ffffff">Нет активных заказов</td>
+        <td>
+            <form asp-action="OrderEdit">
+                <input type="submit" value="Просмотреть" class="btn btn-outline-secondary" />
+            </form>
+        </td>
+        break;
+    }
+
+</tr>
+        }
+
+    }
+</table>

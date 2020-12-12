@@ -57,7 +57,7 @@
 
                 </ul>
                 <form class="form-inline mt-2 mt-md-0" asp-action="Search" asp-controller="Tovar">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search" >
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
@@ -71,15 +71,17 @@
 
         </div>
     </nav>
-    <main role="main" class="col-md-10 ml-sm-5 col-lg-10 px-md-4">
-       
-            
+   
+    <main role="main" class="col-md-10 sm-sm-5 col-lg-10 px-md-4">
+        <div class="d-flex">
+
             @RenderBody()
-        
-        
+        </div>
+
+
     </main>
 
-   
+
 
 
 </body>

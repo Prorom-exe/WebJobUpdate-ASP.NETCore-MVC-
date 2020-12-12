@@ -35,7 +35,7 @@ namespace WebJob.Controllers
             var cartTovar = await db.Tovar.FirstOrDefaultAsync(t => t.Id == Id);
 
             
-            ShopCart shopCart = new ShopCart { User = user, TovarId = cartTovar.Id,TovarName=cartTovar.TovarName,Price=cartTovar.Price, BuyQantity = Quantity, CatalogId=cartTovar.CatalogId };
+            ShopCart shopCart = new ShopCart { UserId = user.Id,UserName=user.UserName, TovarId = cartTovar.Id,TovarName=cartTovar.TovarName,Price=cartTovar.Price, BuyQantity = Quantity, CatalogId=cartTovar.CatalogId };
             db.ShopCart.Add(shopCart);
             await db.SaveChangesAsync();
             return RedirectToAction("Category","Tovar",new {page });
@@ -47,7 +47,7 @@ namespace WebJob.Controllers
         public async Task<ViewResult> CartList()
         {
             var user = await _userManager.GetUserAsync(User);
-            var carts = db.ShopCart.Where(u=>u.User==user);
+            var carts = db.ShopCart.Where(u=>u.UserId==user.Id);
             foreach(var c in carts)
             {
                 sum += c.Price*c.BuyQantity;
@@ -72,7 +72,7 @@ namespace WebJob.Controllers
         
         {
             User user = await _userManager.GetUserAsync(User);
-            var carts = db.ShopCart.Where(u => u.User == user).ToList();
+            var carts = db.ShopCart.Where(u => u.UserId == user.Id).ToList();
             
             Guid g = Guid.NewGuid();
              
@@ -80,7 +80,7 @@ namespace WebJob.Controllers
             {
                 if (tovarOstatok(b.TovarId, b.BuyQantity))
                 {
-                    BuyTovar buyTovar = new BuyTovar { User = user, OrderId = g, TovarName = b.TovarName,Price = b.Price*b.BuyQantity, State = "В обработке", TovarId = b.TovarId, BuyQantity = b.BuyQantity };
+                    BuyTovar buyTovar = new BuyTovar { UserId = user.Id,UserName=user.UserName, OrderId = g, TovarName = b.TovarName,Price = b.Price*b.BuyQantity, State = "В обработке", TovarId = b.TovarId, BuyQantity = b.BuyQantity };
                    
                     await db.BuyTovar.AddRangeAsync(buyTovar);
                 }
@@ -108,17 +108,17 @@ namespace WebJob.Controllers
 
         {
             User user = await _userManager.GetUserAsync(User);
-            buyTovars = db.BuyTovar.Where(u => u.User == user);
+            buyTovars = db.BuyTovar.Where(u => u.UserId == user.Id);
             var buyTovarsGroup = buyTovars.GroupBy(g => g.OrderId).ToList();
            
             return View(buyTovarsGroup);
         }
-
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult OrderListAdmin()
 
         {
             
-            var buyTovarsGroup =db.BuyTovar.GroupBy(g => g.User).ToList();
+            var buyTovarsGroup =db.BuyTovar.GroupBy(g => g.UserId).ToList();
 
             return View(buyTovarsGroup);
         }
@@ -136,5 +136,38 @@ namespace WebJob.Controllers
             return false;
         }
 
+        [Authorize(Roles = "Admin,Moderator")]
+        public IActionResult AllOrdersList()
+            
+        {
+            
+            var allOrders = db.BuyTovar.ToList().GroupBy(g => g.UserId).ToList();
+            
+            return View(allOrders);
+        }
+       
+        
+        [Authorize(Roles = "Admin,Moderator")]
+        
+        public IActionResult OrderEdit(string userId)
+
+        {
+            var currentOrders =  db.BuyTovar.Where(t => t.UserId == userId).ToList().GroupBy(g => g.OrderId).ToList();
+            return View(currentOrders);
+        }
+        
+        
+        [Authorize(Roles = "Admin,Moderator")]
+        [HttpPost]
+        
+        public async Task<IActionResult> OrderEditState(string state, Guid orderId)
+
+        {
+            BuyTovar buy = db.BuyTovar.FirstOrDefault(u=>u.OrderId==orderId);
+            buy.State = state;
+            await db.SaveChangesAsync();
+            
+            return RedirectToAction("AllOrdersList");
+        }
     }
 }

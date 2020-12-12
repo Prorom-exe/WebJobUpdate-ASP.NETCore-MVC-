@@ -24,8 +24,7 @@ namespace WebJob.Controllers
 
         }
 
-        //показать список ролей
-        //public IActionResult Index() => View(_roleManager.Roles.ToList());
+       
 
         public IActionResult UserList() => View(_userManager.Users.ToList());
 

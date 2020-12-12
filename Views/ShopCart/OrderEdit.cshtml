@@ -1,0 +1,49 @@
+﻿@{ Layout = "_LayoutOutCat";}
+@model List<IGrouping<Guid, BuyTovar>>
+
+@foreach (var g in Model)
+{
+<form asp-action="OrderEditState" method="post">
+    <table class="table">
+        <tr><th>Пользователь</th><th>Товары</th><th>Количество</th><th>Цена</th></tr>
+
+
+
+        @foreach (var t in g)
+        {
+            <tr>
+                <td width=200>@t.UserName</td>
+                <td width=200>@t.TovarName</td>
+                <td width=200>@t.BuyQantity</td>
+                <td width=200>@t.Price</td>
+                
+
+            </tr>
+
+        }
+
+
+    </table>
+    <input type="hidden" name="orderId" value="@g.Key" />
+    <h5>Статус заказa</h5>
+    @foreach (var z in g)
+    {
+        if (z.State == "Завершен")
+        {
+            <h5 style="color:#4cff00">Завершен</h5>
+            break;
+        }
+        else
+        {
+<select id="state" name="state">
+    <option disabled selected value="@z.State">@z.State</option>
+    <option value="В обработке">В обработке</option>
+    <option value="Ожидает выдачи ">Ожидает выдачи</option>
+    <option value="Завершен">Завершен</option>
+</select>
+        <p><input type="submit" class="btn-primary" /></p>
+            break;
+        }
+    }
+</form>
+}

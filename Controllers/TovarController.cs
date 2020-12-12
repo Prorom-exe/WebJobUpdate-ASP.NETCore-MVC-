@@ -59,9 +59,14 @@ namespace WebJob.Controllers
             }
             return View(tovars);
         }
-        //[Authorize(Roles="Admin,Moderator")]
+        
         public ViewResult CategoryList() => View(_categories.AllCategories.ToList());
+        
+        
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult CatCreate() => View();
+
+        [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
         public async Task<IActionResult> CatCreate(CategoryCreateViewModel model)
         {
@@ -74,7 +79,9 @@ namespace WebJob.Controllers
             }
             return View(model);
         }
-        
+
+
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> CategoryEdit(int catId)
         {
             
@@ -83,6 +90,8 @@ namespace WebJob.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
         public async Task<IActionResult> CategoryEdit(CategoryCreateViewModel model)
         {
@@ -104,9 +113,16 @@ namespace WebJob.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Admin,Moderator")]
         public ViewResult TovarList() => View(_tovars.AllTovars.ToList());
 
-        public IActionResult TovarCreate() => View();
+       
+        [Authorize(Roles = "Admin,Moderator")]
+         public IActionResult TovarCreate() => View();
+
+
+        [Authorize(Roles = "Admin,Moderator")]
 
         [HttpPost]
         public async Task<IActionResult> TovarCreate(TovarCreateViewModel model)
@@ -132,6 +148,8 @@ namespace WebJob.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> TovarEdit(int tovId)
         {
             Tovar tovar = await db.Tovar.FindAsync(tovId);
@@ -139,6 +157,9 @@ namespace WebJob.Controllers
             return View(model);
         }
 
+
+
+        [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
         public async Task<IActionResult> TovarEdit(TovarCreateViewModel model)
         {

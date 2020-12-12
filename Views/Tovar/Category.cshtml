@@ -1,19 +1,15 @@
 ﻿@model IEnumerable<Tovar>
 @{ Layout = "_Layout";}
 
-<style>
-    .rasp{
-        display:inline-block
-    }
-</style>
+
 
     @foreach (var t in Model)
     {<form method="post" asp-action="CartAdd" asp-controller="ShopCart">
     <input type="hidden" asp-for="@t.Id" name="Id" />
     <input type="hidden" asp-for="@t.Category.CategoryName" name="page" />
-    <div class="rasp">
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+    
+        <div class="col">
+            <div class="card shadow-sm">
                 @if (t.Path != null)
                 {
                     <img class="img-thumbnail" src="data: image / jpeg; base64,@(Convert.ToBase64String(t.Path))" />
@@ -40,7 +36,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </form>
     }
 
